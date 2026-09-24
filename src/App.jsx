@@ -38,8 +38,10 @@ export default function App() {
 
   if (visibleTab === 'admin') {
     return deviceMode === 'mobile' ? (
-      <div className="min-h-screen bg-slate-100">
-        <MobileAdminDashboard />
+      <div className="min-h-screen bg-slate-100 flex justify-center">
+        <div className="w-full max-w-md bg-slate-100 min-h-screen relative shadow-2xl">
+          <MobileAdminDashboard />
+        </div>
       </div>
     ) : (
       <div className="min-h-screen bg-slate-100">
@@ -50,8 +52,8 @@ export default function App() {
 
   if (deviceMode === 'mobile') {
     return (
-      <div className="min-h-screen bg-slate-50 flex justify-center selection:bg-amber-500 selection:text-slate-950">
-        <div className="w-full max-w-md bg-slate-50 min-h-screen relative shadow-2xl">
+      <div className="min-h-screen bg-slate-100 flex justify-center selection:bg-amber-500 selection:text-slate-950">
+        <div className="w-full max-w-md bg-slate-50 min-h-screen relative shadow-2xl border-x border-slate-200/60">
           <MobileHeader title={visibleTab === 'admin' ? 'Admin Pocket' : 'LUMINA GRAND'} />
           
           <main>
