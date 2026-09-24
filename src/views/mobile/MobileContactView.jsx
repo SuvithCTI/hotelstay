@@ -1,0 +1,155 @@
+import React, { useState } from 'react';
+import { useHotel } from '../../context/HotelContext';
+import { PhoneCall, MessageCircle, Send, MapPin, Mail, Sparkles, CheckCircle2 } from 'lucide-react';
+
+export default function MobileContactView() {
+  const { hotelInfo, generateWhatsAppLink } = useHotel();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('General Room Booking Enquiry');
+  const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSuccess(true);
+    setName('');
+    setEmail('');
+    setMessage('');
+    setTimeout(() => setIsSuccess(false), 5000);
+  };
+
+  return (
+    <div className="bg-slate-900 text-slate-100 min-h-screen pb-24 p-3 space-y-4 pt-2">
+      
+      {/* HEADER BANNER */}
+      <div className="bg-[#140f06] p-4 rounded-3xl border border-amber-500/30 shadow-xl space-y-2">
+        <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 flex items-center gap-1">
+          <Sparkles className="w-3 h-3 text-amber-400" /> 24/7 Concierge & Support
+        </span>
+        <h2 className="text-xl font-black font-serif-luxury text-white">Contact Lumina Grand</h2>
+        <p className="text-xs text-amber-100/70">Our dedicated hospitality team is available round-the-clock to assist with your reservations.</p>
+      </div>
+
+      {/* QUICK ACTION BUTTONS */}
+      <div className="grid grid-cols-2 gap-2.5">
+        <a
+          href={`tel:${hotelInfo.phone}`}
+          className="bg-[#140f06] border border-amber-500/30 p-3.5 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 active:scale-95 transition shadow-md"
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-amber-600 text-slate-950 flex items-center justify-center shadow-md">
+            <PhoneCall className="w-5 h-5" />
+          </div>
+          <span className="text-xs font-bold text-white">Call Direct</span>
+          <span className="text-[9px] text-amber-300 font-mono">{hotelInfo.phone}</span>
+        </a>
+
+        <a
+          href={generateWhatsAppLink("Hello Lumina Grand, I have a quick question regarding my luxury stay.")}
+          target="_blank"
+          rel="noreferrer"
+          className="bg-[#140f06] border border-emerald-500/40 p-3.5 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 active:scale-95 transition shadow-md"
+        >
+          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-md">
+            <MessageCircle className="w-5 h-5" />
+          </div>
+          <span className="text-xs font-bold text-white">WhatsApp Chat</span>
+          <span className="text-[9px] text-emerald-300 font-bold">Instant Concierge</span>
+        </a>
+      </div>
+
+      {/* ENQUIRY FORM */}
+      <div className="bg-[#140f06] p-4 rounded-3xl border border-amber-500/30 shadow-xl space-y-3">
+        <h3 className="text-sm font-bold text-white font-serif-luxury">Send Direct Message</h3>
+        
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <input
+            type="text"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your Full Name"
+            className="w-full bg-[#1c1508] border border-amber-500/30 rounded-xl p-2.5 text-xs text-white placeholder-amber-200/40 outline-none focus:border-amber-400"
+          />
+          
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Your Email Address"
+            className="w-full bg-[#1c1508] border border-amber-500/30 rounded-xl p-2.5 text-xs text-white placeholder-amber-200/40 outline-none focus:border-amber-400"
+          />
+          
+          <select
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            className="w-full bg-[#1c1508] border border-amber-500/30 rounded-xl p-2.5 text-xs text-white outline-none cursor-pointer"
+          >
+            <option value="General Room Booking Enquiry">General Room Booking Enquiry</option>
+            <option value="Presidential Ocean Penthouse Suite">Presidential Ocean Penthouse Suite</option>
+            <option value="Grand Ocean View King Suite">Grand Ocean View King Suite</option>
+            <option value="Executive Club Business Room">Executive Club Business Room</option>
+            <option value="Deluxe Garden Veranda Room">Deluxe Garden Veranda Room</option>
+            <option value="Interconnected Family Suite">Interconnected Family Suite</option>
+            <option value="Group / Multi-Room Booking">Group / Multi-Room Booking</option>
+            <option value="Early Check-in & Special Requests">Early Check-in & Special Requests</option>
+          </select>
+
+          <textarea
+            rows={3}
+            required
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Tell us your preferences or questions..."
+            className="w-full bg-[#1c1508] border border-amber-500/30 rounded-xl p-2.5 text-xs text-white placeholder-amber-200/40 outline-none focus:border-amber-400"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20 active:scale-95 transition cursor-pointer"
+          >
+            <Send className="w-3.5 h-3.5 stroke-[2.5]" /> Send Enquiry Message
+          </button>
+        </form>
+
+        {isSuccess && (
+          <div className="p-3 bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-bold text-xs rounded-xl text-center shadow-md flex items-center justify-center gap-1.5">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Message sent to Lumina Grand Concierge!
+          </div>
+        )}
+      </div>
+
+      {/* LOCATION MAP */}
+      <div className="bg-[#140f06] p-4 rounded-3xl border border-amber-500/30 shadow-xl space-y-2">
+        <div className="flex items-center justify-between">
+          <h3 className="text-xs font-bold text-amber-400 uppercase flex items-center gap-1">
+            <MapPin className="w-3.5 h-3.5 text-amber-400" /> Resort Location
+          </h3>
+          <span className="text-[10px] text-amber-200/60 font-medium">Coastal Promenade</span>
+        </div>
+        <p className="text-[11px] text-amber-100/80 leading-relaxed">{hotelInfo.address}</p>
+        <div className="w-full h-44 rounded-2xl overflow-hidden border border-amber-500/20 mt-2">
+          <iframe
+            src={hotelInfo.mapEmbedUrl}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            title="Mobile Resort Map"
+            className="w-full h-full"
+          />
+        </div>
+      </div>
+
+      {/* FOOTER */}
+      <div className="bg-[#140f06] p-3.5 rounded-2xl border border-amber-500/20 text-center space-y-0.5">
+        <div className="text-xs font-bold text-amber-300">Lumina Grand Concierge Desk</div>
+        <p className="text-[10px] text-amber-200/50">24/7 Fast Assistance & Direct Reservations</p>
+      </div>
+
+    </div>
+  );
+}
