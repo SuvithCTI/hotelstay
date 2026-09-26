@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, Eye, EyeOff, Hotel, LockKeyhole, Phone, ShieldCheck, UserRound, LogOut, CheckCircle2, Sparkles, UserPlus, LogIn, User } from 'lucide-react';
 import { useHotel } from '../context/HotelContext';
+import { sanitizeText, sanitizePhone, isValidPhone } from '../utils/security';
 
 export default function LoginView() {
   const { navigateTo, signIn, signUp, signOut, userRole, userMobile, userName, accounts } = useHotel();
@@ -30,7 +31,8 @@ export default function LoginView() {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    if (!/^\d{10}$/.test(formData.mobile)) {
+    const cleanMobile = sanitizePhone(formData.mobile);
+    if (!cleanMobile || cleanMobile.length !== 10) {
       setError('Please enter a valid 10-digit mobile number.');
       return;
     }
@@ -41,20 +43,20 @@ export default function LoginView() {
 
     // Check existing registered accounts or default credentials
     const found = accounts.find(
-      acc => acc.mobile === formData.mobile && acc.password === formData.password && acc.role === role
+      acc => acc.mobile === cleanMobile && acc.password === formData.password && acc.role === role
     );
 
     // Also verify built-in demo credentials
-    const isBuiltInUser = role === 'user' && formData.mobile === '9123456780' && formData.password === 'User@123';
-    const isBuiltInAdmin = role === 'admin' && formData.mobile === '9876543210' && formData.password === 'Admin@123';
+    const isBuiltInUser = role === 'user' && cleanMobile === '9123456780' && formData.password === 'User@123';
+    const isBuiltInAdmin = role === 'admin' && cleanMobile === '9876543210' && formData.password === 'Admin@123';
 
     if (found || isBuiltInUser || isBuiltInAdmin) {
       const displayName = found ? found.name : (role === 'admin' ? 'Hotel Administrator' : 'Guest Member');
-      signIn(role, formData.mobile, displayName);
+      signIn(role, cleanMobile, displayName);
       setToastMsg(`Welcome back, ${displayName}!`);
       setTimeout(() => {
         navigateTo(role === 'admin' ? 'admin' : 'home');
-      }, 450);
+      }, 400);
     } else {
       setError(`Invalid credentials for ${role === 'admin' ? 'Administrator' : 'Guest Member'}. Please check your mobile number and password.`);
     }
@@ -62,12 +64,15 @@ export default function LoginView() {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    if (!formData.name.trim()) {
+    const cleanName = sanitizeText(formData.name);
+    const cleanMobile = sanitizePhone(formData.mobile);
+
+    if (!cleanName) {
       setError('Please enter your full name.');
       return;
     }
-    if (!/^\d{10}$/.test(formData.mobile)) {
-      setError('Please enter a valid 10-digit mobile number.');
+    if (!isValidPhone(cleanMobile)) {
+      setError('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.');
       return;
     }
     if (formData.password.length < 6) {
@@ -80,17 +85,17 @@ export default function LoginView() {
     }
 
     const res = signUp({
-      name: formData.name,
-      mobile: formData.mobile,
+      name: cleanName,
+      mobile: cleanMobile,
       password: formData.password,
       role
     });
 
     if (res.success) {
-      setToastMsg(`Account created! Welcome, ${formData.name}.`);
+      setToastMsg(`Account created! Welcome, ${cleanName}.`);
       setTimeout(() => {
         navigateTo(role === 'admin' ? 'admin' : 'home');
-      }, 450);
+      }, 400);
     } else {
       setError(res.message || 'Failed to create account.');
     }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHotel } from '../../context/HotelContext';
 import { Calendar, CalendarCheck, CheckCircle, MessageCircle, Headphones, Send } from 'lucide-react';
+import { sanitizeText, sanitizePhone, isValidPhone, isValidEmail } from '../../utils/security';
 
 export default function DesktopBookingView() {
   const { rooms, selectedRoomId, setSelectedRoomId, addBooking, generateWhatsAppLink, navigateTo, userMobile, userName, userRole } = useHotel();
@@ -19,6 +20,7 @@ export default function DesktopBookingView() {
   const [checkIn, setCheckIn] = useState(todayStr);
   const [checkOut, setCheckOut] = useState(defaultCheckOutStr);
   const [requests, setRequests] = useState('');
+  const [formError, setFormError] = useState('');
   const [confirmedBooking, setConfirmedBooking] = useState(null);
 
   const currentRoom = rooms.find(r => r.id === selectedRoomId) || rooms[0];
@@ -55,17 +57,37 @@ export default function DesktopBookingView() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormError('');
+
+    const cleanName = sanitizeText(name);
+    const cleanEmail = email.trim();
+    const cleanPhone = sanitizePhone(phone);
+    const cleanRequests = sanitizeText(requests);
+
+    if (!cleanName) {
+      setFormError('Please enter your full name.');
+      return;
+    }
+    if (!isValidEmail(cleanEmail)) {
+      setFormError('Please enter a valid email address.');
+      return;
+    }
+    if (!isValidPhone(cleanPhone)) {
+      setFormError('Please enter a valid 10-digit phone/WhatsApp number starting with 6-9.');
+      return;
+    }
+
     const newBooking = addBooking({
-      customerName: name,
-      customerEmail: email,
-      customerPhone: phone,
+      customerName: cleanName,
+      customerEmail: cleanEmail,
+      customerPhone: cleanPhone,
       roomId: currentRoom.id,
       roomName: currentRoom.name,
       checkIn: checkIn,
       checkOut: checkOut,
       nights: nights,
       guests: parseInt(guests),
-      specialRequests: requests,
+      specialRequests: cleanRequests,
       totalPrice: totalPrice
     });
     setConfirmedBooking(newBooking);
@@ -97,6 +119,12 @@ export default function DesktopBookingView() {
             </h2>
             <span className="text-xs text-rose-500 font-semibold">* Required fields</span>
           </div>
+
+          {formError && (
+            <div className="bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold p-3.5 rounded-2xl">
+              {formError}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

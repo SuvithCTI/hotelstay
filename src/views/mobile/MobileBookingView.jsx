@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHotel } from '../../context/HotelContext';
 import { Calendar, CalendarCheck, CheckCircle2, MessageCircle, Send, Sparkles } from 'lucide-react';
+import { sanitizeText, sanitizePhone, isValidPhone, isValidEmail } from '../../utils/security';
 
 export default function MobileBookingView() {
   const { rooms, selectedRoomId, setSelectedRoomId, addBooking, generateWhatsAppLink, navigateTo, userMobile, userName, userRole } = useHotel();
@@ -19,6 +20,7 @@ export default function MobileBookingView() {
   const [checkIn, setCheckIn] = useState(todayStr);
   const [checkOut, setCheckOut] = useState(defaultCheckOutStr);
   const [requests, setRequests] = useState('');
+  const [formError, setFormError] = useState('');
   const [confirmedBooking, setConfirmedBooking] = useState(null);
 
   const currentRoom = rooms.find(r => r.id === selectedRoomId) || rooms[0];
@@ -54,17 +56,37 @@ export default function MobileBookingView() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormError('');
+
+    const cleanName = sanitizeText(name);
+    const cleanEmail = email.trim();
+    const cleanPhone = sanitizePhone(phone);
+    const cleanRequests = sanitizeText(requests);
+
+    if (!cleanName) {
+      setFormError('Please enter your full name.');
+      return;
+    }
+    if (!isValidEmail(cleanEmail)) {
+      setFormError('Please enter a valid email address.');
+      return;
+    }
+    if (!isValidPhone(cleanPhone)) {
+      setFormError('Please enter a valid 10-digit mobile number starting with 6-9.');
+      return;
+    }
+
     const newBooking = addBooking({
-      customerName: name,
-      customerEmail: email,
-      customerPhone: phone,
+      customerName: cleanName,
+      customerEmail: cleanEmail,
+      customerPhone: cleanPhone,
       roomId: currentRoom.id,
       roomName: currentRoom.name,
       checkIn: checkIn,
       checkOut: checkOut,
       nights: nights,
       guests: parseInt(guests),
-      specialRequests: requests,
+      specialRequests: cleanRequests,
       totalPrice: total
     });
     setConfirmedBooking(newBooking);
@@ -81,6 +103,12 @@ export default function MobileBookingView() {
         <h2 className="text-xl font-black font-serif-luxury text-slate-900">Book Your Luxury Stay</h2>
         <p className="text-xs text-slate-500">Best rate guaranteed • Free in-room breakfast • No booking fees</p>
       </div>
+
+      {formError && (
+        <div className="bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold p-3.5 rounded-2xl">
+          {formError}
+        </div>
+      )}
 
       {/* ROOM SELECTOR */}
       <div className="bg-white p-4 rounded-3xl border border-slate-200/90 shadow-sm space-y-3">
