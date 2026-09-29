@@ -37,7 +37,7 @@ export default function RoomDetailsModal() {
             </div>
             <div className="text-right">
               <div className="text-3xl font-black text-indigo-600 font-outfit">₹{activeModalRoom.price.toLocaleString('en-IN')}</div>
-              <span className="text-xs text-slate-400">per night + 18% GST</span>
+              <span className="text-xs text-slate-400">for 1 day + 18% GST</span>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ export default function RoomDetailsModal() {
               Proceed to Book Room
             </button>
             <a
-              href={generateWhatsAppLink(`Hi Lumina Grand, I am interested in booking the ${activeModalRoom.name} for ₹${activeModalRoom.price.toLocaleString('en-IN')}/night.`)}
+              href={generateWhatsAppLink(`Hi Lumina Grand, I am interested in booking the ${activeModalRoom.name} for ₹${activeModalRoom.price.toLocaleString('en-IN')} / one day.`)}
               target="_blank"
               rel="noreferrer"
               className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 transition text-xs"

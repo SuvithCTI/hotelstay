@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useHotel } from '../../context/HotelContext';
-import { Award, Eye, MessageCircle, Calendar, CalendarCheck, Users, Search, Waves, UtensilsCrossed, Sparkles, ShieldCheck, Star, CheckCircle2, Clock, Coffee, Shield, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Award, Eye, MessageCircle, Calendar, CalendarCheck, Users, Search, Sparkles, Star, CheckCircle2, Shield, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  RealtimeSeaBalconyIcon,
+  RealtimeGourmetDiningIcon,
+  RealtimeHeatedJacuzziIcon,
+  RealtimeVIPButlerIcon,
+  RealtimeBestRateIcon,
+  RealtimeBreakfastIcon,
+  RealtimeFlexibleChangesIcon,
+  RealtimeWhatsAppConciergeIcon
+} from '../../components/common/RealtimeLuxuryIcons';
 
 export default function DesktopHomeView() {
   const { rooms, navigateTo, generateWhatsAppLink, setActiveModalRoom } = useHotel();
@@ -9,7 +19,7 @@ export default function DesktopHomeView() {
   });
   const [checkOut, setCheckOut] = useState(() => {
     const d = new Date();
-    d.setDate(d.getDate() + 2);
+    d.setDate(d.getDate() + 1);
     return d.toISOString().split('T')[0];
   });
   const [guests, setGuests] = useState('2');
@@ -215,9 +225,7 @@ export default function DesktopHomeView() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl group-hover:scale-150 transition duration-500 pointer-events-none"></div>
             <div>
               <div className="flex items-center justify-between mb-5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                  <Waves className="w-7 h-7" />
-                </div>
+                <RealtimeSeaBalconyIcon className="w-16 h-16 shrink-0" />
                 <span className="text-[10px] font-black uppercase tracking-wider text-cyan-700 bg-cyan-100/90 px-2.5 py-1 rounded-full border border-cyan-200">
                   🌊 100% Sea Facing
                 </span>
@@ -237,9 +245,7 @@ export default function DesktopHomeView() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-pink-400/10 rounded-full blur-2xl group-hover:scale-150 transition duration-500 pointer-events-none"></div>
             <div>
               <div className="flex items-center justify-between mb-5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 text-white flex items-center justify-center shadow-lg shadow-pink-500/30 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
-                  <UtensilsCrossed className="w-7 h-7" />
-                </div>
+                <RealtimeGourmetDiningIcon className="w-16 h-16 shrink-0" />
                 <span className="text-[10px] font-black uppercase tracking-wider text-pink-700 bg-pink-100/90 px-2.5 py-1 rounded-full border border-pink-200">
                   🍳 In-Bed Dining
                 </span>
@@ -259,9 +265,7 @@ export default function DesktopHomeView() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-teal-400/10 rounded-full blur-2xl group-hover:scale-150 transition duration-500 pointer-events-none"></div>
             <div>
               <div className="flex items-center justify-between mb-5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 text-white flex items-center justify-center shadow-lg shadow-teal-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                  <Sparkles className="w-7 h-7" />
-                </div>
+                <RealtimeHeatedJacuzziIcon className="w-16 h-16 shrink-0" />
                 <span className="text-[10px] font-black uppercase tracking-wider text-teal-700 bg-teal-100/90 px-2.5 py-1 rounded-full border border-teal-200">
                   ✨ Heated Hydro Spa
                 </span>
@@ -281,9 +285,7 @@ export default function DesktopHomeView() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-full blur-2xl group-hover:scale-150 transition duration-500 pointer-events-none"></div>
             <div>
               <div className="flex items-center justify-between mb-5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
-                  <ShieldCheck className="w-7 h-7" />
-                </div>
+                <RealtimeVIPButlerIcon className="w-16 h-16 shrink-0" />
                 <span className="text-[10px] font-black uppercase tracking-wider text-amber-800 bg-amber-100/90 px-2.5 py-1 rounded-full border border-amber-200">
                   👑 24/7 VIP Service
                 </span>
@@ -346,7 +348,7 @@ export default function DesktopHomeView() {
                 <div>
                   <span className="text-xs text-slate-400 block line-through">₹6,499</span>
                   <div className="text-3xl font-black text-amber-400 font-outfit">
-                    ₹4,999<span className="text-xs text-slate-300 font-normal"> /night</span>
+                    ₹4,999<span className="text-xs text-slate-300 font-normal"> / one day</span>
                   </div>
                 </div>
                 <button
@@ -378,11 +380,9 @@ export default function DesktopHomeView() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Benefit 1: Best Rate Guaranteed (Indigo) */}
-            <div className="relative bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-white p-7 rounded-3xl border-2 border-indigo-200/80 hover:border-indigo-500 hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-2 transition-all duration-300 text-center space-y-3 group overflow-hidden">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-indigo-500/30 group-hover:scale-110 group-hover:rotate-3 transition duration-300">
-                <Shield className="w-7 h-7" />
-              </div>
-              <div>
+            <div className="relative bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-white p-7 rounded-3xl border-2 border-indigo-200/80 hover:border-indigo-500 hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-2 transition-all duration-300 text-center space-y-3 group overflow-hidden flex flex-col justify-between">
+              <div className="flex flex-col items-center">
+                <RealtimeBestRateIcon className="w-16 h-16 mx-auto mb-3" />
                 <span className="text-[10px] font-black text-indigo-700 bg-indigo-100/90 px-2.5 py-0.5 rounded-full inline-block mb-1">
                   ✓ Price Lock
                 </span>
@@ -394,11 +394,9 @@ export default function DesktopHomeView() {
             </div>
 
             {/* Benefit 2: Free In-Room Breakfast (Pink) */}
-            <div className="relative bg-gradient-to-br from-pink-500/10 via-rose-500/5 to-white p-7 rounded-3xl border-2 border-pink-200/80 hover:border-pink-500 hover:shadow-2xl hover:shadow-pink-500/20 hover:-translate-y-2 transition-all duration-300 text-center space-y-3 group overflow-hidden">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-pink-500/30 group-hover:scale-110 group-hover:-rotate-3 transition duration-300">
-                <Coffee className="w-7 h-7" />
-              </div>
-              <div>
+            <div className="relative bg-gradient-to-br from-pink-500/10 via-rose-500/5 to-white p-7 rounded-3xl border-2 border-pink-200/80 hover:border-pink-500 hover:shadow-2xl hover:shadow-pink-500/20 hover:-translate-y-2 transition-all duration-300 text-center space-y-3 group overflow-hidden flex flex-col justify-between">
+              <div className="flex flex-col items-center">
+                <RealtimeBreakfastIcon className="w-16 h-16 mx-auto mb-3" />
                 <span className="text-[10px] font-black text-pink-700 bg-pink-100/90 px-2.5 py-0.5 rounded-full inline-block mb-1">
                   ☕ Daily Included
                 </span>
@@ -410,11 +408,9 @@ export default function DesktopHomeView() {
             </div>
 
             {/* Benefit 3: Flexible Free Changes (Teal) */}
-            <div className="relative bg-gradient-to-br from-teal-500/10 via-emerald-500/5 to-white p-7 rounded-3xl border-2 border-teal-200/80 hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-500/20 hover:-translate-y-2 transition-all duration-300 text-center space-y-3 group overflow-hidden">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-teal-500 to-emerald-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-teal-500/30 group-hover:scale-110 group-hover:rotate-3 transition duration-300">
-                <Clock className="w-7 h-7" />
-              </div>
-              <div>
+            <div className="relative bg-gradient-to-br from-teal-500/10 via-emerald-500/5 to-white p-7 rounded-3xl border-2 border-teal-200/80 hover:border-teal-500 hover:shadow-2xl hover:shadow-teal-500/20 hover:-translate-y-2 transition-all duration-300 text-center space-y-3 group overflow-hidden flex flex-col justify-between">
+              <div className="flex flex-col items-center">
+                <RealtimeFlexibleChangesIcon className="w-16 h-16 mx-auto mb-3" />
                 <span className="text-[10px] font-black text-teal-700 bg-teal-100/90 px-2.5 py-0.5 rounded-full inline-block mb-1">
                   ⏱ 24h Free Flexibility
                 </span>
@@ -426,11 +422,9 @@ export default function DesktopHomeView() {
             </div>
 
             {/* Benefit 4: WhatsApp VIP Concierge (Emerald/Gold) */}
-            <div className="relative bg-gradient-to-br from-emerald-500/10 via-amber-500/5 to-white p-7 rounded-3xl border-2 border-emerald-200/80 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20 hover:-translate-y-2 transition-all duration-300 text-center space-y-3 group overflow-hidden">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/30 group-hover:scale-110 group-hover:-rotate-3 transition duration-300">
-                <MessageCircle className="w-7 h-7" />
-              </div>
-              <div>
+            <div className="relative bg-gradient-to-br from-emerald-500/10 via-amber-500/5 to-white p-7 rounded-3xl border-2 border-emerald-200/80 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20 hover:-translate-y-2 transition-all duration-300 text-center space-y-3 group overflow-hidden flex flex-col justify-between">
+              <div className="flex flex-col items-center">
+                <RealtimeWhatsAppConciergeIcon className="w-16 h-16 mx-auto mb-3" />
                 <span className="text-[10px] font-black text-emerald-800 bg-emerald-100/90 px-2.5 py-0.5 rounded-full inline-block mb-1">
                   💬 &lt;3 Min Response
                 </span>
@@ -488,7 +482,7 @@ export default function DesktopHomeView() {
                     <span className="truncate max-w-[140px] font-outfit font-bold">{room.name.split(' ')[0]} {room.name.split(' ')[1]}</span>
                   </div>
                   <span className="text-[11px] text-slate-500 font-medium mt-1 font-outfit">
-                    ₹{room.price.toLocaleString('en-IN')}/night
+                    ₹{room.price.toLocaleString('en-IN')} / one day
                   </span>
                   <span className="text-[9px] text-indigo-600 font-semibold mt-1.5 bg-indigo-50 px-2.5 py-0.5 rounded-full">
                     View Details →

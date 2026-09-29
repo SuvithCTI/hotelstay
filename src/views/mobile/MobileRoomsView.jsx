@@ -64,7 +64,7 @@ export default function MobileRoomsView() {
           {/* Price Range Slider */}
           <div className="bg-slate-50 px-3.5 py-2.5 rounded-2xl border border-slate-200">
             <div className="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
-              <span>Max Price / Night</span>
+              <span>Max Price / Day</span>
               <span className="text-amber-700 font-black font-outfit">₹{maxPrice.toLocaleString('en-IN')}</span>
             </div>
             <input
@@ -127,7 +127,7 @@ export default function MobileRoomsView() {
                 <div className="absolute bottom-3 right-3 bg-slate-950/90 backdrop-blur-md px-3 py-1 rounded-xl border border-white/20 text-right">
                   <span className="text-[10px] text-slate-400 line-through block">₹{room.originalPrice.toLocaleString('en-IN')}</span>
                   <span className="text-base font-black text-amber-300 font-outfit">₹{room.price.toLocaleString('en-IN')}</span>
-                  <span className="text-[9px] text-slate-300 font-medium"> /night</span>
+                  <span className="text-[9px] text-slate-300 font-medium"> / one day</span>
                 </div>
 
                 <div className="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 border border-white/15">
@@ -180,7 +180,7 @@ export default function MobileRoomsView() {
                     Book This Suite
                   </button>
                   <a
-                    href={generateWhatsAppLink(`Hi Lumina Grand, I want to reserve the ${room.name} (₹${room.price.toLocaleString('en-IN')}/night)`)}
+                    href={generateWhatsAppLink(`Hi Lumina Grand, I want to reserve the ${room.name} (₹${room.price.toLocaleString('en-IN')} / one day)`)}
                     target="_blank"
                     rel="noreferrer"
                     className="bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-xl flex items-center justify-center shadow-sm active:scale-95 transition"

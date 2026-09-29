@@ -77,7 +77,7 @@ export default function DesktopRoomsView() {
             {/* Price Slider */}
             <div className="bg-slate-50 px-4 py-1.5 rounded-xl border border-slate-200">
               <div className="flex justify-between text-[11px] font-bold text-slate-600 mb-1">
-                <span>Max Price / Night</span>
+                <span>Max Price / Day</span>
                 <span className="text-indigo-600 font-black">₹{maxPrice.toLocaleString('en-IN')}</span>
               </div>
               <input
@@ -164,7 +164,7 @@ export default function DesktopRoomsView() {
                     <div>
                       <span className="text-[10px] text-slate-400 line-through block">₹{room.originalPrice.toLocaleString('en-IN')}</span>
                       <div className="text-xl font-black text-slate-900 font-outfit leading-none">
-                        ₹{room.price.toLocaleString('en-IN')}<span className="text-[10px] text-slate-500 font-normal"> /n</span>
+                        ₹{room.price.toLocaleString('en-IN')}<span className="text-[10px] text-slate-500 font-normal"> / one day</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-1.5">

@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useHotel } from '../../context/HotelContext';
-import { Award, Eye, MessageCircle, Calendar, Users, Search, Waves, UtensilsCrossed, Sparkles, ShieldCheck, Star, Shield, Coffee, Clock, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Award, Eye, MessageCircle, Calendar, Users, Search, Sparkles, Star, Shield, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  RealtimeSeaBalconyIcon,
+  RealtimeGourmetDiningIcon,
+  RealtimeHeatedJacuzziIcon,
+  RealtimeVIPButlerIcon,
+  RealtimeBestRateIcon,
+  RealtimeBreakfastIcon,
+  RealtimeFlexibleChangesIcon,
+  RealtimeWhatsAppConciergeIcon
+} from '../../components/common/RealtimeLuxuryIcons';
 
 export default function MobileHomeView() {
   const { rooms, navigateTo, generateWhatsAppLink } = useHotel();
   const [checkIn, setCheckIn] = useState(() => new Date().toISOString().split('T')[0]);
   const [checkOut, setCheckOut] = useState(() => {
     const d = new Date();
-    d.setDate(d.getDate() + 2);
+    d.setDate(d.getDate() + 1);
     return d.toISOString().split('T')[0];
   });
   const [guests, setGuests] = useState('2');
@@ -82,7 +92,7 @@ export default function MobileHomeView() {
           </h1>
           
           <p className="text-xs text-slate-200 line-clamp-2 leading-relaxed font-light">
-            Panoramic sea balconies, heated horizon jacuzzis, and 24/7 dedicated butler service under ₹5,000/night.
+            Panoramic sea balconies, heated horizon jacuzzis, and 24/7 dedicated butler service under ₹5,000 / one day.
           </p>
 
           {/* Centered Metrics Badges */}
@@ -191,49 +201,49 @@ export default function MobileHomeView() {
 
         <div className="grid grid-cols-2 gap-2.5">
           {/* Cyan/Blue Horizon */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-cyan-50 via-blue-50 to-white p-3.5 rounded-2xl border border-cyan-100 shadow-sm">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center shadow-md shadow-cyan-500/20 mb-2">
-              <Waves className="w-4 h-4 stroke-[2.5]" />
+          <div className="relative overflow-hidden bg-gradient-to-br from-cyan-50 via-blue-50 to-white p-3.5 rounded-2xl border border-cyan-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <RealtimeSeaBalconyIcon className="w-12 h-12 mb-2" />
+              <h4 className="text-xs font-bold text-slate-900">Sea Balconies</h4>
+              <span className="text-[10px] text-slate-600 leading-tight block mt-0.5">100% Ocean Sunrise</span>
             </div>
-            <h4 className="text-xs font-bold text-slate-900">Sea Balconies</h4>
-            <span className="text-[10px] text-slate-600 leading-tight block mt-0.5">100% Ocean Sunrise</span>
-            <div className="mt-2 inline-block text-[9px] font-bold text-cyan-800 bg-cyan-100 border border-cyan-200 px-2 py-0.5 rounded-md">
+            <div className="mt-2 inline-block text-[9px] font-bold text-cyan-800 bg-cyan-100 border border-cyan-200 px-2 py-0.5 rounded-md self-start">
               🌊 Sea Facing
             </div>
           </div>
 
           {/* Pink/Rose Dining */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-white p-3.5 rounded-2xl border border-pink-100 shadow-sm">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-pink-500 to-rose-600 text-white flex items-center justify-center shadow-md shadow-pink-500/20 mb-2">
-              <UtensilsCrossed className="w-4 h-4 stroke-[2.5]" />
+          <div className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-white p-3.5 rounded-2xl border border-pink-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <RealtimeGourmetDiningIcon className="w-12 h-12 mb-2" />
+              <h4 className="text-xs font-bold text-slate-900">In-Room Dining</h4>
+              <span className="text-[10px] text-slate-600 leading-tight block mt-0.5">Bespoke Breakfast</span>
             </div>
-            <h4 className="text-xs font-bold text-slate-900">In-Room Dining</h4>
-            <span className="text-[10px] text-slate-600 leading-tight block mt-0.5">Bespoke Breakfast</span>
-            <div className="mt-2 inline-block text-[9px] font-bold text-rose-800 bg-rose-100 border border-rose-200 px-2 py-0.5 rounded-md">
+            <div className="mt-2 inline-block text-[9px] font-bold text-rose-800 bg-rose-100 border border-rose-200 px-2 py-0.5 rounded-md self-start">
               🍳 In-Bed Menu
             </div>
           </div>
 
           {/* Teal/Emerald Jacuzzis */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-emerald-50 to-white p-3.5 rounded-2xl border border-teal-100 shadow-sm">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-600 text-white flex items-center justify-center shadow-md shadow-teal-500/20 mb-2">
-              <Sparkles className="w-4 h-4 stroke-[2.5]" />
+          <div className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-emerald-50 to-white p-3.5 rounded-2xl border border-teal-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <RealtimeHeatedJacuzziIcon className="w-12 h-12 mb-2" />
+              <h4 className="text-xs font-bold text-slate-900">Suite Jacuzzis</h4>
+              <span className="text-[10px] text-slate-600 leading-tight block mt-0.5">Heated Hydro Spa</span>
             </div>
-            <h4 className="text-xs font-bold text-slate-900">Suite Jacuzzis</h4>
-            <span className="text-[10px] text-slate-600 leading-tight block mt-0.5">Heated Hydro Spa</span>
-            <div className="mt-2 inline-block text-[9px] font-bold text-teal-800 bg-teal-100 border border-teal-200 px-2 py-0.5 rounded-md">
+            <div className="mt-2 inline-block text-[9px] font-bold text-teal-800 bg-teal-100 border border-teal-200 px-2 py-0.5 rounded-md self-start">
               ✨ Heated Spa
             </div>
           </div>
 
           {/* Amber/Gold Butler */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-yellow-50 to-white p-3.5 rounded-2xl border border-amber-100 shadow-sm">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-500 text-slate-950 flex items-center justify-center shadow-md shadow-amber-500/20 mb-2">
-              <ShieldCheck className="w-4 h-4 stroke-[2.5]" />
+          <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-yellow-50 to-white p-3.5 rounded-2xl border border-amber-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <RealtimeVIPButlerIcon className="w-12 h-12 mb-2" />
+              <h4 className="text-xs font-bold text-slate-900">24/7 VIP Butler</h4>
+              <span className="text-[10px] text-slate-600 leading-tight block mt-0.5">Express Concierge</span>
             </div>
-            <h4 className="text-xs font-bold text-slate-900">24/7 VIP Butler</h4>
-            <span className="text-[10px] text-slate-600 leading-tight block mt-0.5">Express Concierge</span>
-            <div className="mt-2 inline-block text-[9px] font-bold text-amber-800 bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-md">
+            <div className="mt-2 inline-block text-[9px] font-bold text-amber-800 bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-md self-start">
               👑 Dedicated VIP
             </div>
           </div>
@@ -254,7 +264,7 @@ export default function MobileHomeView() {
               ★ Crown Jewel Suite
             </div>
             <div className="absolute bottom-3 right-3 bg-slate-950/90 backdrop-blur-md text-amber-300 font-black text-sm px-3 py-1 rounded-xl border border-white/20">
-              ₹4,999<span className="text-[10px] text-slate-300 font-normal"> /night</span>
+              ₹4,999<span className="text-[10px] text-slate-300 font-normal"> / one day</span>
             </div>
           </div>
 
@@ -295,39 +305,39 @@ export default function MobileHomeView() {
 
         <div className="grid grid-cols-2 gap-2.5">
           {/* Indigo Rate Guarantee */}
-          <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-white p-3.5 rounded-2xl border border-indigo-100 space-y-1.5 shadow-sm">
-            <div className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
-              <Shield className="w-4 h-4 stroke-[2.5]" />
+          <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-white p-3.5 rounded-2xl border border-indigo-100 space-y-1.5 shadow-sm flex flex-col justify-between">
+            <RealtimeBestRateIcon className="w-10 h-10 mb-1" />
+            <div>
+              <h4 className="text-xs font-bold text-slate-900">Best Rate Lock</h4>
+              <p className="text-[10px] text-slate-600 leading-tight mt-0.5">All suites strictly under ₹5,000</p>
             </div>
-            <h4 className="text-xs font-bold text-slate-900">Best Rate Lock</h4>
-            <p className="text-[10px] text-slate-600 leading-tight">All suites strictly under ₹5,000</p>
           </div>
 
           {/* Pink Free Breakfast */}
-          <div className="bg-gradient-to-br from-pink-50 via-rose-50 to-white p-3.5 rounded-2xl border border-pink-100 space-y-1.5 shadow-sm">
-            <div className="w-8 h-8 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center">
-              <Coffee className="w-4 h-4 stroke-[2.5]" />
+          <div className="bg-gradient-to-br from-pink-50 via-rose-50 to-white p-3.5 rounded-2xl border border-pink-100 space-y-1.5 shadow-sm flex flex-col justify-between">
+            <RealtimeBreakfastIcon className="w-10 h-10 mb-1" />
+            <div>
+              <h4 className="text-xs font-bold text-slate-900">Free Breakfast</h4>
+              <p className="text-[10px] text-slate-600 leading-tight mt-0.5">Gourmet in-room morning treats</p>
             </div>
-            <h4 className="text-xs font-bold text-slate-900">Free Breakfast</h4>
-            <p className="text-[10px] text-slate-600 leading-tight">Gourmet in-room morning treats</p>
           </div>
 
           {/* Teal Free Changes */}
-          <div className="bg-gradient-to-br from-teal-50 via-emerald-50 to-white p-3.5 rounded-2xl border border-teal-100 space-y-1.5 shadow-sm">
-            <div className="w-8 h-8 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center">
-              <Clock className="w-4 h-4 stroke-[2.5]" />
+          <div className="bg-gradient-to-br from-teal-50 via-emerald-50 to-white p-3.5 rounded-2xl border border-teal-100 space-y-1.5 shadow-sm flex flex-col justify-between">
+            <RealtimeFlexibleChangesIcon className="w-10 h-10 mb-1" />
+            <div>
+              <h4 className="text-xs font-bold text-slate-900">Free Changes</h4>
+              <p className="text-[10px] text-slate-600 leading-tight mt-0.5">Modify stay up to 24h prior</p>
             </div>
-            <h4 className="text-xs font-bold text-slate-900">Free Changes</h4>
-            <p className="text-[10px] text-slate-600 leading-tight">Modify stay up to 24h prior</p>
           </div>
 
           {/* Emerald WhatsApp VIP */}
-          <div className="bg-gradient-to-br from-emerald-50 via-green-50 to-white p-3.5 rounded-2xl border border-emerald-100 space-y-1.5 shadow-sm">
-            <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
-              <MessageCircle className="w-4 h-4 stroke-[2.5]" />
+          <div className="bg-gradient-to-br from-emerald-50 via-green-50 to-white p-3.5 rounded-2xl border border-emerald-100 space-y-1.5 shadow-sm flex flex-col justify-between">
+            <RealtimeWhatsAppConciergeIcon className="w-10 h-10 mb-1" />
+            <div>
+              <h4 className="text-xs font-bold text-slate-900">WhatsApp VIP</h4>
+              <p className="text-[10px] text-slate-600 leading-tight mt-0.5">&lt;3 min concierge response</p>
             </div>
-            <h4 className="text-xs font-bold text-slate-900">WhatsApp VIP</h4>
-            <p className="text-[10px] text-slate-600 leading-tight">&lt;3 min concierge response</p>
           </div>
         </div>
       </section>
@@ -361,7 +371,7 @@ export default function MobileHomeView() {
                   <span className="truncate max-w-[100px]">{room.name.split(' ')[0]} {room.name.split(' ')[1]}</span>
                 </div>
                 <span className="text-[9px] text-slate-800 font-bold font-outfit mt-0.5">
-                  ₹{room.price.toLocaleString('en-IN')}/n
+                  ₹{room.price.toLocaleString('en-IN')} / one day
                 </span>
                 <span className="text-[8px] text-indigo-600 font-bold mt-0.5">View Details →</span>
               </div>

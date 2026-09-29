@@ -9,7 +9,7 @@ export default function DesktopBookingView() {
   const todayStr = new Date().toISOString().split('T')[0];
   const defaultCheckOutStr = (() => {
     const d = new Date();
-    d.setDate(d.getDate() + 2);
+    d.setDate(d.getDate() + 1);
     return d.toISOString().split('T')[0];
   })();
 
@@ -199,7 +199,7 @@ export default function DesktopBookingView() {
               >
                 {rooms.map(r => (
                   <option key={r.id} value={r.id}>
-                    {r.name} - ₹{r.price.toLocaleString('en-IN')}/night ({r.category})
+                    {r.name} - ₹{r.price.toLocaleString('en-IN')} / one day ({r.category})
                   </option>
                 ))}
               </select>
@@ -271,7 +271,7 @@ export default function DesktopBookingView() {
               <div className="flex-1 flex flex-col justify-center">
                 <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider">{currentRoom?.category}</span>
                 <h4 className="text-sm font-bold text-slate-900 leading-tight">{currentRoom?.name}</h4>
-                <div className="text-xs font-bold text-slate-700 mt-1">₹{currentRoom?.price.toLocaleString('en-IN')} / night</div>
+                <div className="text-xs font-bold text-slate-700 mt-1">₹{currentRoom?.price.toLocaleString('en-IN')} / one day</div>
                 <span className="text-[11px] text-slate-500">{currentRoom?.bed} • {currentRoom?.capacity}</span>
               </div>
             </div>
@@ -279,10 +279,10 @@ export default function DesktopBookingView() {
             <div className="space-y-2.5 text-xs border-b border-slate-100 pb-4">
               <div className="flex justify-between text-slate-600">
                 <span>Duration</span>
-                <span className="font-bold text-slate-800">{nights} Night{nights > 1 ? 's' : ''}</span>
+                <span className="font-bold text-slate-800">{nights} Day{nights > 1 ? 's' : ''}</span>
               </div>
               <div className="flex justify-between text-slate-600">
-                <span>Room Charge ({nights} × ₹{currentRoom?.price.toLocaleString('en-IN')})</span>
+                <span>Room Charge ({nights} Day{nights > 1 ? 's' : ''} × ₹{currentRoom?.price.toLocaleString('en-IN')})</span>
                 <span className="font-bold text-slate-800">₹{subtotal.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-slate-600">
@@ -301,7 +301,7 @@ export default function DesktopBookingView() {
 
             <div className="mt-6 pt-4 border-t border-slate-100">
               <a
-                href={generateWhatsAppLink(`Hello Lumina Grand! I want to reserve: ${currentRoom?.name} (${nights} nights, from ${checkIn} to ${checkOut}, ${guests} guests). Total: ₹${totalPrice.toLocaleString('en-IN')}.`)}
+                href={generateWhatsAppLink(`Hello Lumina Grand! I want to reserve: ${currentRoom?.name} (${nights} day${nights > 1 ? 's' : ''}, from ${checkIn} to ${checkOut}, ${guests} guests). Total: ₹${totalPrice.toLocaleString('en-IN')}.`)}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-xs"
@@ -350,7 +350,7 @@ export default function DesktopBookingView() {
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Dates:</span>
-                <span className="font-bold text-slate-800">{confirmedBooking.checkIn} to {confirmedBooking.checkOut} ({confirmedBooking.nights} nights)</span>
+                <span className="font-bold text-slate-800">{confirmedBooking.checkIn} to {confirmedBooking.checkOut} ({confirmedBooking.nights} day{confirmedBooking.nights > 1 ? 's' : ''})</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Total Price:</span>

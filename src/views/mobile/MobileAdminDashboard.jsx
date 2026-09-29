@@ -107,7 +107,7 @@ export default function MobileAdminDashboard() {
 
                 <div className="bg-slate-50 p-3 rounded-xl text-xs space-y-1.5 text-slate-800 border border-slate-200">
                   <div><strong className="text-slate-900">Room:</strong> <span className="font-bold text-slate-800">{b.roomName}</span></div>
-                  <div><strong className="text-slate-900">Dates:</strong> <span className="font-bold text-slate-800">{b.checkIn} → {b.checkOut} ({b.nights}n)</span></div>
+                  <div><strong className="text-slate-900">Dates:</strong> <span className="font-bold text-slate-800">{b.checkIn} → {b.checkOut} ({b.nights}d)</span></div>
                   <div><strong className="text-slate-900">Total:</strong> <span className="text-emerald-700 font-black font-outfit text-sm">₹{b.totalPrice.toLocaleString('en-IN')}</span></div>
                 </div>
 
@@ -164,7 +164,7 @@ export default function MobileAdminDashboard() {
               <div className="flex-1">
                 <h4 className="text-xs font-black text-slate-950">{room.name}</h4>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <span className="text-xs font-black text-emerald-800 font-outfit">₹{room.price.toLocaleString('en-IN')}/n</span>
+                  <span className="text-xs font-black text-emerald-800 font-outfit">₹{room.price.toLocaleString('en-IN')} / one day</span>
                   <button
                     onClick={() => toggleRoomAvailability(room.id)}
                     className={`text-[10px] font-black px-2.5 py-0.5 rounded-full ${

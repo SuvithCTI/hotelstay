@@ -34,7 +34,7 @@ export default function MobileRoomSheet() {
             </div>
             <div className="text-right">
               <div className="text-xl font-black text-amber-700 font-outfit">₹{activeModalRoom.price.toLocaleString('en-IN')}</div>
-              <span className="text-[9px] text-slate-500 font-medium">/night (taxes incl.)</span>
+              <span className="text-[9px] text-slate-500 font-medium">/ one day (taxes incl.)</span>
             </div>
           </div>
 

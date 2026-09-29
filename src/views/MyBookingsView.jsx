@@ -138,7 +138,7 @@ export default function MyBookingsView() {
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Stay Dates</p>
                         <p className="mt-0.5 font-bold text-slate-900 text-xs">{booking.checkIn} → {booking.checkOut}</p>
-                        <p className="text-[11px] text-slate-500">{booking.nights} night(s) stay</p>
+                        <p className="text-[11px] text-slate-500">{booking.nights} day(s) stay</p>
                       </div>
                     </div>
 

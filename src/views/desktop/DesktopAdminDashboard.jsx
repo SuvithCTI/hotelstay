@@ -234,7 +234,7 @@ export default function DesktopAdminDashboard() {
                       <th className="p-4">Guest Details</th>
                       <th className="p-4">Room Selected</th>
                       <th className="p-4">Stay Dates</th>
-                      <th className="p-4">Nights / Guests</th>
+                      <th className="p-4">Days / Guests</th>
                       <th className="p-4">Total Amount</th>
                       <th className="p-4">Status</th>
                       <th className="p-4 text-right">Actions</th>
@@ -272,7 +272,7 @@ export default function DesktopAdminDashboard() {
                           </td>
                           <td className="p-4">
                             <span className="font-black text-slate-800 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-md inline-block">
-                              {b.nights} N • {b.guests} G
+                              {b.nights} D • {b.guests} G
                             </span>
                           </td>
                           <td className="p-4">
@@ -350,7 +350,7 @@ export default function DesktopAdminDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-black text-slate-900">Manage Hotel Suites & Pricing</h2>
-                <p className="text-slate-600 text-xs">Update nightly rates, toggle availability status, or add new suites.</p>
+                <p className="text-slate-600 text-xs">Update daily rates, toggle availability status, or add new suites.</p>
               </div>
               <button
                 onClick={openAddModal}
@@ -387,7 +387,7 @@ export default function DesktopAdminDashboard() {
                     </div>
 
                     <div className="bg-emerald-50/80 p-3 rounded-2xl border border-emerald-200 flex items-center justify-between">
-                      <span className="text-xs text-slate-700 font-bold">Rate / Night:</span>
+                      <span className="text-xs text-slate-700 font-bold">Rate / one day:</span>
                       <div className="text-emerald-800 font-black text-base font-outfit">₹{room.price.toLocaleString('en-IN')}</div>
                     </div>
 
@@ -457,7 +457,7 @@ export default function DesktopAdminDashboard() {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-black text-slate-800 uppercase mb-1">Price / Night (₹ INR)</label>
+                  <label className="block font-black text-slate-800 uppercase mb-1">Price / one day (₹ INR)</label>
                   <input
                     type="number"
                     required

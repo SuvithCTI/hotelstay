@@ -9,7 +9,7 @@ export default function MobileBookingView() {
   const todayStr = new Date().toISOString().split('T')[0];
   const defaultCheckOutStr = (() => {
     const d = new Date();
-    d.setDate(d.getDate() + 2);
+    d.setDate(d.getDate() + 1);
     return d.toISOString().split('T')[0];
   })();
 
@@ -120,7 +120,7 @@ export default function MobileBookingView() {
         >
           {rooms.map(r => (
             <option key={r.id} value={r.id}>
-              {r.name} - ₹{r.price.toLocaleString('en-IN')}/night ({r.category})
+              {r.name} - ₹{r.price.toLocaleString('en-IN')} / one day ({r.category})
             </option>
           ))}
         </select>
@@ -132,7 +132,7 @@ export default function MobileBookingView() {
             <h4 className="text-xs font-black text-slate-900 leading-tight mt-0.5">{currentRoom?.name}</h4>
             <div className="flex items-baseline gap-1 mt-1">
               <span className="text-sm font-black text-amber-700 font-outfit">₹{currentRoom?.price.toLocaleString('en-IN')}</span>
-              <span className="text-[10px] text-slate-500">/night</span>
+              <span className="text-[10px] text-slate-500"> / one day</span>
             </div>
             <span className="text-[10px] text-slate-600">{currentRoom?.bed} • {currentRoom?.capacity}</span>
           </div>
@@ -231,10 +231,10 @@ export default function MobileBookingView() {
         <div className="bg-white p-4 rounded-3xl border border-slate-200/90 shadow-sm text-xs space-y-2">
           <div className="flex justify-between text-slate-600">
             <span>Duration:</span>
-            <span className="text-slate-900 font-bold">{nights} Night{nights > 1 ? 's' : ''}</span>
+            <span className="text-slate-900 font-bold">{nights} Day{nights > 1 ? 's' : ''}</span>
           </div>
           <div className="flex justify-between text-slate-600">
-            <span>Room Charges ({nights} × ₹{roomPrice.toLocaleString('en-IN')}):</span>
+            <span>Room Charges ({nights} Day{nights > 1 ? 's' : ''} × ₹{roomPrice.toLocaleString('en-IN')}):</span>
             <span className="text-slate-900 font-bold">₹{subtotal.toLocaleString('en-IN')}</span>
           </div>
           <div className="flex justify-between text-slate-600">
